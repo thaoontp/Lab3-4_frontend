@@ -14,6 +14,7 @@
         v-model:activeIndex="activeIndex"
       />
       <p v-else>Không có liên hệ nào.</p>
+
       <div class="mt-3 row justify-content-around align-items-center">
         <button class="btn btn-sm btn-primary" @click="refreshList()">
           <i class="fas fa-redo"></i> Làm mới
@@ -26,6 +27,7 @@
         </button>
       </div>
     </div>
+
     <div class="mt-3 col-md-6">
       <div v-if="activeContact">
         <h4>
@@ -40,18 +42,20 @@
           }"
         >
           <span class="mt-2 badge badge-warning">
-            <i class="fas fa-edit"></i> Hiệu chỉnh</span
-          >
+            <i class="fas fa-edit"></i>
+            Hiệu chỉnh
+          </span>
         </router-link>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import ContactList from "@/components/ContactList.vue";
-import ContactService from "@/services/contact.service.js";
+import ContactService from "@/services/contact.service";
 export default {
   components: {
     ContactCard,
@@ -66,21 +70,19 @@ export default {
     };
   },
   watch: {
-    // Giám sát các thay đổi của biến searchText.
-    // Bỏ chọn phần tử đang được chọn trong danh sách.
     searchText() {
       this.activeIndex = -1;
     },
   },
   computed: {
-    // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
+    // Chuyển các đối tượng contact thành chuỗi
     contactStrings() {
       return this.contacts.map((contact) => {
         const { name, email, address, phone } = contact;
         return [name, email, address, phone].join("");
       });
     },
-    // Trả về các contact có chứa thông tin cần tìm kiếm.
+    // Trả về các contact cần tìm kiếm.
     filteredContacts() {
       if (!this.searchText) return this.contacts;
       return this.contacts.filter((_contact, index) =>
@@ -126,6 +128,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .page {
   text-align: left;
