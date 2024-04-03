@@ -6,6 +6,9 @@ class ContactService {
   async getAll() {
     return (await this.api.get("/")).data;
   }
+  async getAllFavorite() {
+    return (await this.api.get("/favorite")).data;
+  }
   async create(data) {
     return (await this.api.post("/", data)).data;
   }
@@ -20,6 +23,9 @@ class ContactService {
   }
   async delete(id) {
     return (await this.api.delete(`/${id}`)).data;
+  }
+  async findFavorite() {
+    return await this.find({ favorite: true });
   }
 }
 export default new ContactService();

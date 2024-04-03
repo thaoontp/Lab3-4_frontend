@@ -4,20 +4,10 @@
       <InputSearch v-model="searchText" />
     </div>
     <div class="mt-3 col-md-6">
-      <div class="d-flex align-items-center justify-content-between">
-        <h4>
-          Danh bạ
-          <i class="fas fa-address-book"></i>
-        </h4>
-        <router-link :to="{ name: 'contact.favorite' }">
-          <div style="margin-bottom: 3px">
-            <button type="button" class="btn btn-info">
-              Yêu thích
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </router-link>
-      </div>
+      <h4>
+        Danh bạ
+        <i class="fas fa-address-book"></i>
+      </h4>
       <ContactList
         v-if="filteredContactsCount > 0"
         :contacts="filteredContacts"
@@ -110,7 +100,7 @@ export default {
   methods: {
     async retrieveContacts() {
       try {
-        this.contacts = await ContactService.getAll();
+        this.contacts = await ContactService.getAllFavorite();
       } catch (error) {
         console.log(error);
       }
